@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net10.0-windows;net9.0-windows;net8.0-windows;net7.0-windows;net6.0-windows</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <UseWindowsForms>true</UseWindowsForms>
+        <OutputPath>$(ProjectDir)lib\</OutputPath>
+
+        <Version>0.5.0</Version>
+        <PackageId>KBEHtool</PackageId>
+        <Title>KBEHtool</Title>
+        <Authors>DanKe</Authors>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/DanKE123abc/KBEHtool</PackageProjectUrl>
+        <Description>Keyboard Behavior Library for Windows</Description>
+        <Copyright>Copyright (c) 2024 - present</Copyright>
+        <PackageTags>DanKe;Keyboard;KBEH;Windows</PackageTags>
+        <PackageReleaseNotes>net10.0-windows net9.0-windows net8.0-windows net7.0-windows net6.0-windows</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <OutputPath>$(ProjectDir)lib\</OutputPath>
+    </PropertyGroup>
+    
+</Project>

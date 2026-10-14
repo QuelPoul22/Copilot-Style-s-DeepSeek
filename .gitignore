@@ -1,0 +1,14 @@
+# 编译产物
+bin/
+obj/
+lib/
+publish/
+
+# VS / Rider
+.vs/
+.idea/
+*.user
+
+# 系统
+Thumbs.db
+Desktop.ini
