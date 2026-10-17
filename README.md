@@ -223,7 +223,7 @@ Get-ItemProperty "HKLM:\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients\{F3017
 确认目录结构是：
 
 ```
-DC\
+Copilot-Style-s-DeepSeek\
 ├─DeepSeekCopliot\
 └─kbehtool\
    └─KBEHtool\
