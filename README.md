@@ -1,8 +1,6 @@
 # DeepSeek Copilot
 
-用 DeepSeek 替代 Windows 11 Copilot 键的侧边栏助手。
-
-国内 Copilot 键基本用不了？把那个键"夺舍"过来，按一下就弹出 DeepSeek 网页版侧边栏，随问随答。
+把DeepSeek网页版本套壳成侧边栏助手的软件，祝各位用得快乐。
 
 > 本项目基于 [DanKE123abc/DeepSeekCopliot](https://github.com/DanKE123abc/DeepSeekCopliot) 修改，并集成了其配套的键盘钩子库 [DanKE123abc/KBEHtool](https://github.com/DanKE123abc/KBEHtool)。
 
@@ -11,6 +9,8 @@
 ## 下载
 
 前往 [Releases](https://github.com/QuelPoul22/Copilot-Style-s-DeepSeek/releases) 下载最新安装包。
+
+系统要求：Windows 10 1809+ / Windows 11；需 WebView2 Runtime（Win11 及较新 Win10 自带）。
 
 ---
 
@@ -21,14 +21,16 @@
   - 短按 Copilot 键：显示 / 隐藏侧边栏
   - 长按 Copilot 键（500ms）：进入屏幕截图模式，框选区域后自动粘贴到 DeepSeek 视觉输入
 - **Enter / Shift+Enter 交换**：默认 DeepSeek 网页是「Enter 发送、Shift+Enter 换行」，本项目将其交换为「Enter 换行、Shift+Enter 发送」。
-- **WebView 常驻**：侧边栏隐藏后不销毁 WebView，输入框内容、生成中的回答都会被保留。因此调节释放 WebView 资源等待会报错，直接点继续就行。
+- **WebView 常驻**：侧边栏隐藏后不销毁 WebView，输入框内容、生成中的回答都会被保留。v1.0.0版本在设置里面尝试调节 释放WebView资源等待 的时长会报错，直接点继续就行(建议使用最新版本，该问题已在新版中修复)。
 - **外部调用接口**：提供命名管道，任何程序都能把问题丢给 DeepSeek 侧边栏。
-- **主题 / 透明度 / 宽度可调**：设置界面可视化调整。
+- **主题 / 透明度 / 宽度可调**：设置界面进行可视化调整，主题可以跟随系统、深色、浅色；宽度建议调整为 770；透明度目前只作用于标题栏，对侧边栏主体无效，因此建议调节为不透明。
 - **系统托盘**：左键切换侧边栏，右键菜单含设置、主题、开机自启等。
 
 ---
 
 ## 目录结构
+
+注：目录名 DeepSeekCopliot 沿用上游拼写，实际产品名为 DeepSeek Copilot。
 
 ```
 .
@@ -83,6 +85,7 @@ dotnet --list-sdks
 ```
 
 应看到 `10.x.x` 的条目。
+我的版本是10.0.203，其他的我没有尝试过。
 
 ---
 
@@ -181,22 +184,24 @@ Write-Host $r.ReadLine()
 ### 呼出侧边栏
 
 - 键盘有 Copilot 键：直接短按
-- 没有 Copilot 键：点系统托盘图标（左键）
+- 没有 Copilot 键：点系统托盘图标（左键）或者短按右Ctrl
 
 ### 按键
 
 | 操作 | 效果 |
 |---|---|
-| 短按 Copilot | 显示 / 隐藏侧边栏 |
+| 短按 Copilot/右Ctrl | 显示 / 隐藏侧边栏 |
 | 长按 Copilot（500ms） | 截图并粘贴到 DeepSeek |
 | **Enter** | 换行 |
 | **Shift+Enter** | 发送 |
-| 按住 Ctrl 再按 Copilot | 切换「Copilot 映射为右 Ctrl」开关 |
+| 按住 左Ctrl 再按 Copilot | 切换「Copilot 映射为右 Ctrl」开关 |
 | Esc | 隐藏侧边栏 |
 
 ### 设置
 
 托盘右键 → 设置，可调整侧边栏宽度、透明度、动画速度、主题、开机自启、Copilot 映射等。
+也可以呼出侧边栏，然后点击设置（外表是一个华丽的图标，位置为窗口标题栏靠右上方）。
+以下三项均可在设置中关闭：Copilot 键映射为右 Ctrl、按 Ctrl + Copilot 切换映射、长按 Copilot 截屏。
 
 ---
 
@@ -242,9 +247,13 @@ window.__dsCopilotEnterSwapped
 - 返回 `true`：脚本已注入
 - 返回 `undefined`：脚本未注入，检查 WebView2 是否正常加载
 
-### 卸载后 `%LocalAppData%\DeepSeekCopilot` 还在
+### 卸载与安装的问题
 
-可能是 `msedgewebview2.exe` 进程未结束导致文件占用。重启后手动删掉即可。
+卸载后 `%LocalAppData%\DeepSeekCopilot` 为什么还在？
+- 可能是 `msedgewebview2.exe` 进程未结束导致文件占用。重启后手动删掉即可。
+
+为什么这个软件只有一个 EXE 文件，还要用安装包进行安装？
+- 因为卸载时安装程序会一并清理 %LocalAppData%\DeepSeekCopilot 下的残留文件，保证软件的绿色、纯粹。
 
 ---
 
@@ -277,4 +286,5 @@ window.__dsCopilotEnterSwapped
 
 - [DanKE123abc](https://github.com/DanKE123abc) — 原始的 DeepSeekCopliot 与 KBEHtool 项目
 - [DeepSeek](https://chat.deepseek.com) — AI 对话服务
+- Inno Setup Compiler — 软件打包
 - 所有上游依赖的开源作者

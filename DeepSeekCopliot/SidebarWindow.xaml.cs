@@ -7,6 +7,7 @@
 	using System.Windows.Interop;
 	using System.Windows.Media;
 	using System.Windows.Media.Animation;
+	using System.Windows.Media.Imaging;
 	using System.Windows.Threading;
 
 	namespace deepseek_copilot;
@@ -114,7 +115,8 @@
 
 			Icon = IconHelper.RenderToBitmapSource(16);
 			TitleIcon.Source = IconHelper.RenderToBitmapSource(18);
-
+			RefreshIcon.Source = new BitmapImage(new Uri("pack://application:,,,/refresh_arrow.ico"));
+			
 			var workArea = SystemParameters.WorkArea;
 			Left = workArea.Right;
 			Top = workArea.Top;
@@ -412,6 +414,15 @@
 				Hide();
 			};
 			BeginAnimation(LeftProperty, anim);
+		}
+		
+		private void OnRefreshClick(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				_webView?.CoreWebView2?.Reload();
+			}
+			catch { }
 		}
 
 		private void OnSettingsClick(object sender, RoutedEventArgs e)

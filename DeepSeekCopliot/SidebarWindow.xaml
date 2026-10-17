@@ -26,14 +26,38 @@
                 <!-- Title Bar -->
                 <Border x:Name="TitleBar" Grid.Row="0" Background="#FFFFFF" CornerRadius="8,0,0,0">
                     <Grid>
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 左：图标 + 标题 -->
+                        <StackPanel Grid.Column="0" Orientation="Horizontal"
+                                    VerticalAlignment="Center" Margin="12,0,0,0"
+                                    HorizontalAlignment="Left">
                             <Image x:Name="TitleIcon" Width="18" Height="18"/>
                             <TextBlock x:Name="TitleText" Text="加载中…" FontSize="14" FontWeight="SemiBold"
                                        Margin="8,0,0,0"
                                        Foreground="#1A1A2E"
                                        TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,12,0">
+
+                        <!-- 中：刷新按钮 -->
+                        <Button x:Name="RefreshButton" Grid.Column="1"
+                                Width="32" Height="32"
+                                Padding="0"
+                                Background="Transparent" BorderThickness="0"
+                                Click="OnRefreshClick" Cursor="Hand"
+                                ToolTip="刷新 DeepSeek 页面"
+                                VerticalAlignment="Center">
+                            <Image x:Name="RefreshIcon" Width="18" Height="18" Stretch="Uniform"/>
+                        </Button>
+
+                        <!-- 右：设置 + 关闭 -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal"
+                                    HorizontalAlignment="Right" Margin="0,0,12,0"
+                                    VerticalAlignment="Center">
                             <Button x:Name="SettingsButton" Content="⚙" Width="32" Height="32"
                                     Padding="0"
                                     Background="Transparent" BorderThickness="0"
